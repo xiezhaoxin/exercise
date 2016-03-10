@@ -1,5 +1,8 @@
 package com.xiezhaoxin.project.game24.controller;
 
+import java.util.Date;
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -83,6 +86,22 @@ public class Game24Controller {
 	}
 	
 	/**
+	 * 查询所有题目
+	 * 
+	 * @Title: getAllQuestion
+	 * @Description: TODO(这里用一句话描述这个方法的作用)
+	 * @param @return    设定文件 
+	 * @return ReturnMessage    返回类型
+	 */
+	@RequestMapping(value = "/get/question/all")
+	public @ResponseBody ReturnMessage getAllQuestion() {
+		long time = new Date().getTime();
+		List<Game24> all = game24Rep.findAll();
+		System.err.println("********" + (new Date().getTime() - time));
+		return new ReturnMessage(all);
+	}
+	
+	/**
 	 * 保存所有题目
 	 * 
 	 * @Title: saveAllGame24
@@ -92,7 +111,9 @@ public class Game24Controller {
 	 */
 	@RequestMapping(value = "/save/all", method = RequestMethod.POST)
 	public @ResponseBody ReturnMessage saveAllGame24() {
+		long time = new Date().getTime();
 		factory.saveAllGame24();
+		System.err.println("-------" + (new Date().getTime() - time));
 		return new ReturnMessage();
 	}
 
